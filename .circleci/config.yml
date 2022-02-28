@@ -12,7 +12,7 @@ jobs:
       - checkout
       - run: node --version
       - run:
-          name: Install dependencies
+          name: Install yarn dependencies
           command: yarn
       - run:
           name: test
