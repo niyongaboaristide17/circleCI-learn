@@ -7,6 +7,14 @@ jobs:
     steps:
       - checkout
       - run: node --version
+      - run:
+          name: Installing dependency
+          command: yarn
+      - run:
+          name: Run tests
+          command: yarn run test
+
+
 
 workflows:
   test-deploy:
