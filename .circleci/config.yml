@@ -1,6 +1,7 @@
 version: 2.1
 
 orbs:
+  node: circleci/node@5.0.0
   coveralls: coveralls/coveralls@1.0.6
 
 jobs:
@@ -10,20 +11,25 @@ jobs:
     steps:
       - checkout
       - run: node --version
+      - restore_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: Install and make 1
-          command: yarn && make test-coverage-1
+        name: Install dependencies
+        command: yarn
+      - save_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
+        paths:
+          - ./node_modules
       - run:
-          name: Run tests
-          command: yarn run test
+        name: test
+        command: yarn run test
+      - run:
+        name: code-coverage
+        command: yarn run coverage
       - coveralls/upload
-      
 
 workflows:
   test-deploy:
     jobs:
       - build
-
-notify:
-  webhooks:
-    - url: https://coveralls.io/webhook?repo_token=cd1836a044509c0f6fea93d34cc42ce254d41e5e
+      
