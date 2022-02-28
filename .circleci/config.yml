@@ -6,6 +6,8 @@ orbs:
 
 jobs:
   build-1:
+    docker:
+      - image: cimg/node:17.6.0
     steps:
       - checkout
         - run: yarn
