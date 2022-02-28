@@ -11,21 +11,15 @@ jobs:
     steps:
       - checkout
       - run: node --version
-      - restore_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
       - run:
-        name: Install dependencies
-        command: yarn
-      - save_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
-        paths:
-          - ./node_modules
+          name: Install dependencies
+          command: yarn
       - run:
-        name: test
-        command: yarn run test
+          name: test
+          command: yarn run test
       - run:
-        name: code-coverage
-        command: yarn run coverage
+          name: code-coverage
+          command: yarn run coverage
       - coveralls/upload
 
 workflows:
