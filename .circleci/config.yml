@@ -10,8 +10,8 @@ jobs:
       - image: cimg/node:17.6.0
     steps:
       - checkout
-        - run: yarn
-        - run: make test-coverage-1
+      - run: yarn
+      - run: make test-coverage-1
 
       - coveralls/upload:
           parallel: true
