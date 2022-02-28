@@ -1,45 +1,23 @@
 version: 2.1
 
-orbs:
-  node: circleci/node@5.0.0
-  coveralls: coveralls/coveralls@1.0.6
-
 jobs:
-  build-1:
+  build:
     docker:
       - image: cimg/node:17.6.0
     steps:
       - checkout
-      - run: yarn
-      - run: make test-coverage-1
-
-      - coveralls/upload:
-          parallel: true
-          flag_name: Test 1
-          verbose: true
-
-  build-2:
-
-    steps:
-      - checkout
-      - run: yarn
-      - run: make test-coverage-2
-
-      - coveralls/upload:
-          parallel: true
-          flag_name: Test 2
-          verbose: true
-
-  done:
-    steps:
-      - coveralls/upload:
-          parallel_finished: true
+      - run:
+          name: Node version
+          command: node --version
+      - run:
+          name: Install dependencies
+          command: yarn
+      - run:
+          name: Run Test
+          command: yarn run test
 
 workflows:
-  test_parallel_then_upload:
+  test-deploy:
     jobs:
-      - build-1
-      - build-2
-      - done:
-          requires: [build-1, build-2]
+      - build
       
