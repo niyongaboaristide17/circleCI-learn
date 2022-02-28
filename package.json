@@ -1,0 +1,8 @@
+{
+  "name": "circleCI-learn",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:niyongaboaristide17/circleCI-learn.git",
+  "author": "niyongaboaristide17 <niyongaboaristide17@gmail.com>",
+  "license": "MIT"
+}
