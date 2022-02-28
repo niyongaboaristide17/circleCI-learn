@@ -11,6 +11,7 @@
     "dev": "better-npm-run dev",
     "test": "better-npm-run test"
   },
+  "coverage": "nyc report --reporter=text-lcov | coveralls",
   "betterScripts": {
     "dev": {
       "command": "nodemon --exec babel-node ./src/app.js",
